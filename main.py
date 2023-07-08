@@ -26,7 +26,7 @@ def format_text(raw_text):
     raw_text = raw_text.replace(" ", "").replace("\t", "")
     return raw_text
 
-@app.get("/{paragem}")
+@app.get("/stops/{paragem}")
 def get_stops(paragem: str):
 
     html_response = requests.get(f'https://www.stcp.pt/pt/widget/post.php?uid=d72242190a22274321cacf9eadc7ec5f&paragem={paragem}')
