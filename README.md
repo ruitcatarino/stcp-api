@@ -12,6 +12,11 @@ All endpoints are relative to the [API hosted on Deta Space](https://stcpapi-1-f
 
 - Method: `GET`
 
+- Example request:
+  ```
+  https://stcpapi-1-f2965388.deta.app/stops/GGT2
+  ```
+
 - Response:
   ```json
   {
