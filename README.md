@@ -72,8 +72,14 @@ poetry run uvicorn main:app --reload
 
 ### Docker
 ```bash
+docker docker pull ruitcatarino/stcp-api
+docker run -p 8000:8000 ruitcatarino/stcp-api
+```
+
+### Docker from source
+```bash
 docker build -t stcp-api .
-docker run stcp-api
+docker run -p 8000:8000 stcp-api
 ```
 
 ## Built With
