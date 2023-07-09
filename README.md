@@ -50,7 +50,7 @@ All endpoints are relative to the [API hosted on Deta Space](https://stcpapi-1-f
 
 ### `/docs`
 
-![Interactive API docs](https://prnt.sc/Qiiv1YOJXJMf)
+![Interactive API docs](https://i.ibb.co/5YLRnqP/Screenshot-4.png)
 
 ## Installation
 
