@@ -60,25 +60,17 @@ cd stcp-api
 ```
 
 ### Python
-
 ``` bash
 pip3 install -r requirements.txt
-```
-#### Usage
-```bash
 uvicorn main:app
 ```
 
 ### Poetry
-
-#### Usage
 ```bash
 poetry run uvicorn main:app --reload
 ```
 
 ### Docker
-
-#### Usage
 ```bash
 docker build -t stcp-api .
 docker run stcp-api
