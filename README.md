@@ -2,7 +2,7 @@
 
 Unofficial API for the STCP (Serviço de Transportes Coletivos do Porto), the city's public transportation system.
 
-I chose to sniff the HTTP queries made by the SMSBus app because STCP does not offer its users a freely accessible API to monitor departure times in real-time.
+It sniffs HTTP queries made by the SMSBus application because STCP does not offer its users a free access API to monitor departure times in real-time.
 
 ## Current Endpoints
 
