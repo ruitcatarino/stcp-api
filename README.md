@@ -1,5 +1,100 @@
 # STCP API
 
-Hosted API on Deta Space
+Unofficial API for the STCP (Serviço de Transportes Coletivos do Porto), the city's public transportation system.
 
-https://stcpapi-1-f2965388.deta.app/
+I chose to sniff the HTTP queries made by the SMSBus app because STCP does not offer its users a freely accessible API to monitor departure times in real-time.
+
+## Current Endpoints
+
+All endpoints are relative to the [API hosted on Deta Space](https://stcpapi-1-f2965388.deta.app/)
+
+### `/stops/<paragem>`
+
+- Method: `GET`
+
+- Response:
+  ```json
+  {
+        "0": [
+            "Linha",
+            "Destino",
+            "Proxima"
+        ],
+        "1": [
+            "200",
+            "BOLHAO-",
+            "apassar-"
+        ],
+        "2": [
+            "207",
+            "CAMPANHA-P",
+            "15:08-1min"
+        ],
+        "3": [
+            "204",
+            "H.S.JOAO",
+            "15:11-4min"
+        ],
+        "4": [
+            "503",
+            "BOAVISTAB.S",
+            "15:12-5min"
+        ],
+        "5": [
+            "200",
+            "BOLHAO-",
+            "15:18-11min"
+        ]
+    }
+  ```
+
+### `/docs`
+
+![Interactive API docs](https://prnt.sc/Qiiv1YOJXJMf)
+
+## Installation
+
+``` bash
+git clone https://github.com/ruitcatarino/stcp-api
+cd stcp-api
+```
+
+### Python
+
+``` bash
+pip3 install -r requirements.txt
+```
+#### Usage
+```bash
+uvicorn main:app
+```
+
+### Poetry
+
+#### Usage
+```bash
+poetry run uvicorn main:app --reload
+```
+
+### Docker
+
+#### Usage
+```bash
+docker build -t stcp-api .
+docker run stcp-api
+```
+
+## Built With
+
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Requests](https://requests.readthedocs.io/en/master/)
+- [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
+- [uvicorn](https://www.uvicorn.org/)
+
+## Contributing
+
+Feel free to submit a [pull request](https://github.com/ruitcatarino/stcp-api/pull/new/main) or an [issue](https://github.com/ruitcatarino/stcp-api/issues/new)!
+
+## License
+
+The MIT License (MIT)
