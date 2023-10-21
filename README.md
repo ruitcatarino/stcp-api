@@ -3,6 +3,7 @@
 
 ## Overview
 The STCP API is an unofficial API for the STCP, offering access to real-time departure times. It is designed to work with HTTP queries made by the SMSBus application since STCP does not provide a free access API for real-time departure monitoring.
+App hosted at ![Deta Space](https://stcpapi-1-f2965388.deta.app)
 
 ## Current Endpoints
 The API is hosted on Deta Space and provides the following endpoint:
