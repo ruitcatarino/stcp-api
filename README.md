@@ -1,4 +1,5 @@
 # STCP API
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://spdx.org/licenses/MIT.html)
 
 ## Overview
 The STCP API is an unofficial API for the STCP, offering access to real-time departure times. It is designed to work with HTTP queries made by the SMSBus application since STCP does not provide a free access API for real-time departure monitoring.
