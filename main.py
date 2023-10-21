@@ -1,5 +1,5 @@
 import json
-import requests
+import httpx
 import re
 from bs4 import BeautifulSoup
 from typing import Union
@@ -28,23 +28,28 @@ def format_text(raw_text):
 
 @app.get("/stops/{paragem}")
 def get_stops(paragem: str):
+    url = f'https://www.stcp.pt/pt/widget/post.php?uid=d72242190a22274321cacf9eadc7ec5f&paragem={paragem}'
 
-    html_response = requests.get(f'https://www.stcp.pt/pt/widget/post.php?uid=d72242190a22274321cacf9eadc7ec5f&paragem={paragem}')
-    html_response = ' '.join(html_response.content.decode().rstrip().split())
-    soup = BeautifulSoup(html_response, 'html.parser')
-    stops = {}
+    try:
+        response = httpx.get(url, verify=False)
+        response.raise_for_status()
 
-    i = 0
-    key = 0
+        cleaned_html = ' '.join(response.text.rstrip().split())
+        soup = BeautifulSoup(cleaned_html, 'html.parser')
 
-    for div in soup.find_all('div', class_='floatLeft'):
-        if any("Linha" in item for item in div.get('class')):
-            if str(key) not in stops.keys():
-                stops[str(key)] = [format_text(div.get_text())]
-            else:
-                stops[str(key)].append(format_text(div.get_text()))
-            i+=1
-            if i % 3 == 0:
-                key+=1
+        stops = {}
+        key = 0
 
-    return(stops)
+        for div in soup.find_all('div', class_='floatLeft'):
+            if any("Linha" in item for item in div.get('class')):
+                stop_text = format_text(div.get_text())
+                stops.setdefault(str(key), []).append(stop_text)
+
+                if len(stops[str(key)]) % 3 == 0:
+                    key += 1
+
+        print(stops)
+        return stops
+    except httpx.HTTPError as e:
+        print(f"Request failed: {e}")
+        return None

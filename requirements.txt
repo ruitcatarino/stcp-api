@@ -1,4 +1,4 @@
 fastapi
 uvicorn[standard]
-requests
+httpx
 beautifulsoup4

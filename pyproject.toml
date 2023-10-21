@@ -11,8 +11,8 @@ packages = [{include = "stcp_api"}]
 python = "^3.10"
 fastapi = "^0.100.0"
 uvicorn = {extras = ["standard"], version = "^0.22.0"}
-requests = "^2.31.0"
 beautifulsoup4 = "^4.12.2"
+httpx = "^0.25.0"
 
 
 [build-system]
