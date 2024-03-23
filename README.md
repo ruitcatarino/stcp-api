@@ -9,7 +9,7 @@ The API is hosted on [Deta Space](https://apistcp-1-u2420399.deta.app) and provi
 
 ### `/stops/<paragem>`
 - **Method:** `GET`
-- **Example Request:** `https://stcpapi-1-f2965388.deta.app/stops/GGT2`
+- **[Example Request](https://apistcp-1-u2420399.deta.app/stops/GGT2)**
 - **Response:**
   ```json
   {
