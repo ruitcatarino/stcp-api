@@ -1,14 +1,14 @@
-import json
-import httpx
+import itertools
 import re
+
+import httpx
 from bs4 import BeautifulSoup
-from typing import Union
 from fastapi import FastAPI
 
 app = FastAPI()
 
 
-def format_text(raw_text):
+async def format_text(raw_text):
     raw_text = re.sub("[àáâãäå]", "a", raw_text)
     raw_text = re.sub("[ÀÁÂÃÄÅ]", "A", raw_text)
     raw_text = re.sub("[èéêë]", "e", raw_text)
@@ -29,27 +29,24 @@ def format_text(raw_text):
 
 
 @app.get("/stops/{paragem}")
-def get_stops(paragem: str):
+async def get_stops(paragem: str):
     url = f"https://www.stcp.pt/pt/widget/post.php?uid=d72242190a22274321cacf9eadc7ec5f&paragem={paragem}"
 
     try:
-        response = httpx.get(url, verify=False)
-        response.raise_for_status()
+        async with httpx.AsyncClient(verify=False) as client:
+            response = await client.get(url)
+            response.raise_for_status()
 
-        cleaned_html = " ".join(response.text.rstrip().split())
-        soup = BeautifulSoup(cleaned_html, "html.parser")
+            cleaned_html = " ".join(response.text.rstrip().split())
+            soup = BeautifulSoup(cleaned_html, "html.parser")
 
-        stops = {}
-        key = 0
+            stops_lines = []
 
-        for div in soup.find_all("div", class_="floatLeft"):
-            if any("Linha" in item for item in div.get("class")):
-                stop_text = format_text(div.get_text())
-                stops.setdefault(str(key), []).append(stop_text)
+            for div in soup.find_all("div", class_="floatLeft"):
+                if any("Linha" in item for item in div.get("class")):
+                    stop_text = await format_text(div.get_text())
+                    stops_lines.append(stop_text)
 
-                if len(stops[str(key)]) % 3 == 0:
-                    key += 1
-
-        return stops
+            return list(itertools.batched(stops_lines[3:], 3))
     except httpx.HTTPError as e:
         return None

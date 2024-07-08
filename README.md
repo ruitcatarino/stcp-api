@@ -12,14 +12,13 @@ The API is hosted on [Deta Space](https://apistcp-1-u2420399.deta.app) and provi
 - **[Example Request](https://apistcp-1-u2420399.deta.app/stops/GGT2)**
 - **Response:**
   ```json
-  {
-    "0": ["Linha", "Destino", "Proxima"],
-    "1": ["200", "BOLHAO-", "apassar-"],
-    "2": ["207", "CAMPANHA-P", "15:08-1min"],
-    "3": ["204", "H.S.JOAO", "15:11-4min"],
-    "4": ["503", "BOAVISTAB.S", "15:12-5min"],
-    "5": ["200", "BOLHAO-", "15:18-11min"]
-  }
+  [
+    ["200", "BOLHAO-", "apassar-"],
+    ["207", "CAMPANHA-P", "15:08-1min"],
+    ["204", "H.S.JOAO", "15:11-4min"],
+    ["503", "BOAVISTAB.S", "15:12-5min"],
+    ["200", "BOLHAO-", "15:18-11min"],
+  ]
 ### `/docs`
 
 ![Interactive API docs](https://i.ibb.co/5YLRnqP/Screenshot-4.png)
