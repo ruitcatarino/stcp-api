@@ -7,6 +7,21 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+def _batched(iterable, n):
+    """
+    itertools.batched() added in Python 3.12
+    This was only added beacause deta space only supports up to Python 3.9
+    """
+    if n < 1:
+        raise ValueError('n must be at least one')
+    iterator = iter(iterable)
+    while batch := tuple(itertools.islice(iterator, n)):
+        yield batch
+
+# Patch itertools with the batched function if not already available
+if not hasattr(itertools, "batched"):
+    itertools.batched = _batched
+
 
 async def format_text(raw_text):
     raw_text = re.sub("[àáâãäå]", "a", raw_text)
